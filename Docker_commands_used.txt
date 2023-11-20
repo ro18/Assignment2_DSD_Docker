@@ -1,0 +1,73 @@
+************  T1 *****************
+
+docker pull ozxx33/fileserver-base
+
+
+
+
+docker run -p 65432:65432 -it --name server_container_t1 ozxx33/fileserver-base
+
+docker cp "C:\Users\mihir\Downloads\Docker_T1" server_container_t1:/t1
+
+docker start server_container_t1
+
+docker exec -it server_container_t1 bash
+
+docker commit server_container_t1 client_server_task_t1
+
+docker images
+
+
+docker exec -it server_container_t1 bash 
+
+cd t1 
+
+python server.py
+
+------
+
+Terminal 2
+
+docker run -it --name client1_container_t1 client_server_task_t1  -- Client 1
+
+docker start client1_container_t1
+
+docker exec -it client1_container_t1 bash
+
+mkdir client1_files
+
+cd client1_files
+
+
+------
+
+Terminal 3
+
+docker run -it --name client2_container_t1 client_server_task_t1  -- Client 2
+
+
+docker start client1_container_t1  -- not needed
+
+docker exec -it client1_container_t1 bash -- not needed
+
+mkdir client2_files
+
+cd client2_files
+
+-------
+
+
+Terminal 4
+
+docker run -it --name client3_container_t1 client_server_task_t1
+
+
+
+
+
+
+
+
+
+
+

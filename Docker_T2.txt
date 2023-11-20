@@ -1,0 +1,103 @@
+************  T2 *****************
+SERVER : 172.17.0.2 : 00b9972a4a4d
+
+docker pull ozxx33/mpi4py-cluster-base
+
+
+docker run -it --mount "type=bind,src=%cd%,target=/mpi" -it --name mpi_prep ozxx33/mpi4py-cluster-base bash
+
+passwd  -- ro123
+
+apt-get update
+
+apt-get install nano net-tools iputils-ping openssh-client openssh-server
+
+service ssh start
+
+service ssh stop
+
+pip install pandas==1.5.0
+
+
+docker commit T2Server mpi_cluster_t2 -- not needed
+
+
+docker run -it --mount "type=bind,src=%cd%,target=/mpi" -it --name T2Server mpi_cluster_t2 bash
+
+
+
+docker start T2Server-- not needed
+
+docker exec -it T2Server bash -- not needed
+
+
+
+
+ssh-keygen -t rsa
+
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@<container_ip>
+
+import tqdm
+
+
+
+
+
+
+
+
+
+-----------
+
+Slave 1  : 172.17.0.3 : a3da2127625f
+
+docker run -it --mount "type=bind,src=%cd%,target=/mpi" -it --name T2SlaveOne mpi_cluster_t2 bash
+
+
+
+passwd
+
+
+service ssh start
+
+nano /etc/hosts - add IP of server
+
+
+
+------
+
+Slave 2 : 172.17.0.4 : 7b1a6b1e21f6
+docker run -it --mount "type=bind,src=%cd%,target=/mpi" -it --name T2Slave2 mpi_cluster_t2 bash
+
+
+
+passwd 
+
+service ssh start
+
+nano /etc/hosts - add IP of server
+
+
+
+-------
+
+Slave 3 : 172.17.0.5 : 26a772e60f8f
+
+docker run -it --mount "type=bind,src=%cd%,target=/mpi" -it --name T2Slave3 mpi_cluster_t2 bash
+
+
+passwd
+
+service ssh start
+
+nano /etc/hosts - add IP of server
+
+
+
+
+
+
+
+
+
